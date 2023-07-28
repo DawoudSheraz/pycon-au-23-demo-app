@@ -1,0 +1,14 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Syed Muhammad Dawoud Sheraz Ali", email = "dawoud.sheraz@gmail.com"},
+]
+dependencies = [
+    "factory-boy>=3.3.0",
+]
+requires-python = ">=3.9"
+license = {text = "MIT"}
