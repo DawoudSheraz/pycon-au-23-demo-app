@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import logging
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'debug_toolbar',
+    'nplusone.ext.django',
 
     'main',
 ]
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'nplusone.ext.django.NPlusOneMiddleware',
 ]
 
 DEBUG_TOOLBAR_PANELS = [
@@ -149,3 +151,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+NPLUSONE_LOGGER = logging.getLogger('nplusone')
+NPLUSONE_LOG_LEVEL = logging.WARN
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'nplusone': {
+            'handlers': ['console'],
+            'level': 'WARN',
+        },
+    },
+}

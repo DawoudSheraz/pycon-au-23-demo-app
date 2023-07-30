@@ -9,14 +9,17 @@ from main.models import (
     Specializations
 )
 from main.serializers import (
-    MinimalBookSerializer,
+    BooksSerializer,
     AuthorSerializer
 )
 
 
 class BookListView(generics.ListAPIView):
 
-    serializer_class = MinimalBookSerializer
+    serializer_class = BooksSerializer
+    # queryset = Book.objects.select_related('author', 'author__user', 'type').prefetch_related(
+    #     'tags', 'author__specializations'
+    # )
     queryset = Book.objects.all()
     permission_classes = ()
 
@@ -24,5 +27,8 @@ class BookListView(generics.ListAPIView):
 class AuthorListView(generics.ListAPIView):
 
     serializer_class = AuthorSerializer
+    # queryset = Author.objects.prefetch_related('user').prefetch_related(
+    #     'books', 'specializations', 'books__type', 'books__tags'
+    # )
     queryset = Author.objects.all()
     permission_classes = ()

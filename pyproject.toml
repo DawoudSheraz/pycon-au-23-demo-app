@@ -9,6 +9,8 @@ authors = [
 ]
 dependencies = [
     "factory-boy>=3.3.0",
+    "nplusone>=1.0.0",
+    "django-debug-toolbar>=4.1.0",
 ]
 requires-python = ">=3.9"
 license = {text = "MIT"}
