@@ -53,6 +53,17 @@ class MinimalBookSerializer(ModelSerializer):
         fields = ('title', 'description', 'published', 'publish_date', 'tags', 'type')
 
 
+class AuthorSerializer(ModelSerializer):
+
+    books = MinimalBookSerializer(many=True)
+    user = UserSerializer()
+    specializations = SlugRelatedField(slug_field='slug', queryset=Specializations.objects.all(), many=True)
+
+    class Meta:
+        model = Author
+        fields = ('user', 'specializations', 'date_of_birth', 'books')
+
+
 class MinimalAuthorSerializer(ModelSerializer):
     """
     Author serializer that will be used within BookSerializer when listing books.
@@ -64,17 +75,6 @@ class MinimalAuthorSerializer(ModelSerializer):
     class Meta:
         model = Author
         fields = ('email', 'username', 'specializations', 'date_of_birth')
-
-
-class AuthorSerializer(ModelSerializer):
-
-    books = MinimalBookSerializer(many=True)
-    user = UserSerializer()
-    specializations = SlugRelatedField(slug_field='slug', queryset=Specializations.objects.all(), many=True)
-
-    class Meta:
-        model = Author
-        fields = ('user', 'specializations', 'date_of_birth', 'books')
 
 
 class BooksSerializer(ModelSerializer):

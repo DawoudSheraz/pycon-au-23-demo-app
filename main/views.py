@@ -4,9 +4,6 @@ from rest_framework import generics
 from main.models import (
     Author,
     Book,
-    BookCategory,
-    Tags,
-    Specializations
 )
 from main.serializers import (
     BooksSerializer,
